@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { getPosts } from './post.controller.js';
+import { getPosts, getSinglePost } from './post.controller.js';
 
 const router = Router();
 
@@ -9,10 +9,7 @@ router.post('/', (req, res) => {
     res.send('route pour publier un post')
 });
 
-router.get('/:id', (req, res) => {
-    const { id } = req.params
-    res.send('route pour récupérer le post : ' + id)
-})
+router.get('/:id', getSinglePost)
 
 router.put('/:id', (req, res) => {
     const { id } = req.params
