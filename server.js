@@ -1,7 +1,9 @@
 import express from "express";
+import expressJSDocSwagger from "express-jsdoc-swagger";
 import mongoose from "mongoose";
 import config from "./config.js";
 import { routerApi } from "./routers/api.rooter.js";
+import { swaggerOptions } from "./swagger-options.js";
 
 mongoose.set('strictQuery', true);
 mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@${config.db.host}/?retryWrites=true&w=majority`)
@@ -9,6 +11,8 @@ mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@${config
         .catch(err => console.log(err))
 
 const app = express();
+
+expressJSDocSwagger(app)(swaggerOptions)
 
 app.use('/api', routerApi)
 

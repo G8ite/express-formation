@@ -39,5 +39,6 @@ const remove = async (req, res) => {
 
 export {
     getAll as getPosts,
-    getSingle as getSinglePost
+    getSingle as getSinglePost,
+    create as createPost
 }
