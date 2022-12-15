@@ -1,5 +1,26 @@
 import {Router} from 'express';
-import { createPost, getPosts, getSinglePost } from './post.controller.js';
+import { createPost, getPosts, getSinglePost, removePost, updatePost } from './post.controller.js';
+
+const router = Router();
+
+/**
+ * GET /api/post
+ * @summary Get all posts
+ * @tags Post
+ * @return { object } 200 - success response
+ */
+
+router.get('/', getPosts);
+
+/**
+ * GET /api/post/{id}
+ * @summary Get a single post
+ * @tags Post
+ * @param { string } id.path.required - Post id
+ * @return { Post } 200
+ */
+
+router.get('/:id', getSinglePost)
 
 /**
  * POST /api/post
@@ -9,31 +30,28 @@ import { createPost, getPosts, getSinglePost } from './post.controller.js';
  * @return { object } 201 - success response
  */
 
-const router = Router();
-
-router.get('/', getPosts);
-router.get('/:id', getSinglePost)
-
-/**
- * POST /api/post
- * @summary Create a new post
- * @tags Post
- * @param { Post } request.body.required
- * @return { object } 201 - Post created
- */
 router.post("/", createPost);
 
 
+/**
+ * PUT /api/post/{id}
+ * @summary Update one Post
+ * @tags Put
+ * @param { string } id.path.required - Post id
+ * @param { Post } request.body.required - Post
+ * @return { object } 201 - success response
+ */
+router.put('/:id', updatePost);
 
-router.put('/:id', (req, res) => {
-    const { id } = req.params
-    res.send('route pour récupérer le post : ' + id)
-})
+/**
+ * DELETE /api/post/{id}
+ * @summary Delete One Post
+ * @tags Delete
+ * @param { string } id.path.required - Post id
+ * @return { object } 204 - success response
+ */
+router.delete('/:id', removePost)
 
-router.delete('/:id', (req, res) => {
-    const { id } = req.params
-    res.send('route pour supprimer le post : ' + id)
-})
 export {
     router as routerPost
 }

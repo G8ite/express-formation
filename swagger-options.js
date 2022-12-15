@@ -20,7 +20,7 @@ export const swaggerOptions = {
     },
   },
   baseDir: dirname,
-  filesPattern: './*/.js',
+  filesPattern: './**/*.js',
   swaggerUIPath: '/api-docs',
   exposeSwaggerUI: true,
   exposeApiDocs: false,
