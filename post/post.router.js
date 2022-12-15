@@ -1,11 +1,28 @@
 import {Router} from 'express';
+import { getPosts } from './post.controller.js';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.send('route des posts')
+router.get('/', getPosts);
+
+router.post('/', (req, res) => {
+    res.send('route pour publier un post')
 });
 
+router.get('/:id', (req, res) => {
+    const { id } = req.params
+    res.send('route pour récupérer le post : ' + id)
+})
+
+router.put('/:id', (req, res) => {
+    const { id } = req.params
+    res.send('route pour récupérer le post : ' + id)
+})
+
+router.delete('/:id', (req, res) => {
+    const { id } = req.params
+    res.send('route pour supprimer le post : ' + id)
+})
 export {
     router as routerPost
 }
