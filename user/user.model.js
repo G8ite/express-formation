@@ -10,6 +10,6 @@ import { isEmail } from "../middlewares/email.validator.js";
 const schema = new Schema({
     email: {type: String, unique: true,trim: true, lowercase: true, validate: [isEmail, "Veuillez vérifier le format de votre email"]},
     password: {type: String}
-},{ timestamps: true })
+})
 
 export const User = model('User', schema)

@@ -36,7 +36,7 @@ const update = async (req, res) => {
     try {
         const { body : data, params : { id }} = req
         const post = await Post.findOneAndUpdate({_id: id}, data, {returnOriginal: false})
-        res.status(201).json("Le post " + id + "a été modifié")
+        res.status(201).json(post)
     } catch(err) {
         res.status(400).json({message : err.message})
     }
@@ -45,7 +45,7 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
     try {
         const { id } = req.params
-        const post = await Post.deleteOne({_id: id})
+        await Post.deleteOne({_id: id})
         res.status(200).json("Le post " + id + "a été supprimé")
     }catch(err) {
         res.status(400).json({message : err.message})

@@ -5,6 +5,7 @@ import config from "./config.js";
 import { routerApi } from "./routers/api.rooter.js";
 import { swaggerOptions } from "./swagger-options.js";
 import cors from "cors"
+import morgan from "morgan";
 
 mongoose.set('strictQuery', true);
 
@@ -13,6 +14,12 @@ mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@${config
         .catch(err => console.log(err))
 
 const app = express();
+
+if(config.environment != 'test'){
+    const logger = morgan('tiny')
+    morgan(':method :url :status :res[content-length] - :reponse-time ms')
+    app.use(logger)
+}
 
 app.use(express.json())
 
@@ -27,4 +34,8 @@ expressJSDocSwagger(app)(swaggerOptions)
 
 app.use('/api', routerApi)
 
-app.listen(parseInt(config.port), console.log('listen ' + config.port))
+if (config.environment !== 'test') {
+    app.listen(parseInt(config.port), console.log('listen ' + config.port))
+}
+
+export { app, mongoose }
