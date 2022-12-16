@@ -11,5 +11,6 @@ export default {
         port: process.env.DB_PORT,
         database: process.env.DB_NAME
     },
-    secret: process.env.SECRET
+    secret: process.env.SECRET,
+    environment: process.env.NODE_ENV || 'development',
 }
